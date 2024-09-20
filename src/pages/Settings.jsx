@@ -48,6 +48,8 @@ function Settings() {
     };
 
     const changePassword = async (e) => {
+        setError('');
+        setSuccessMsg('');
         e.preventDefault();
         setLoading(true);
         if (pass.length < 8) {
