@@ -60,7 +60,7 @@ function Settings() {
         
         try {
             const response = await updatePassword(pass, oldPass);
-            if (response.success) {
+            if (response.status) {
                 setSuccessMsg('Password updated successfully');
                 setError('');
             }

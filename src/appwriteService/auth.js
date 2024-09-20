@@ -81,7 +81,8 @@ export const getAllSessions = async () => {
 
 export const updatePassword = async (currPass, newPass) => {
     try {
-        await account.updatePassword(currPass, newPass);
+        const response = await account.updatePassword(currPass, newPass);
+        return response;
 
     } catch (error) {
         throw error;
