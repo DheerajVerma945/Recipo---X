@@ -1,0 +1,21 @@
+{
+    "icons": [
+      {
+        "src": "files/RecipoX(Logo).png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "files/RecipoX(Logo).png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "/",
+    "background_color": "#ffffff",
+    "display": "standalone",  
+    "theme_color": "#8a3333",
+    "orientation": "portrait-primary"
+}
+
+  

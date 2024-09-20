@@ -1,0 +1,56 @@
+.dropdown-enter {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.dropdown-enter-active {
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 1500ms ease-in-out, opacity 2000ms ease-in-out;
+}
+
+.dropdown-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.dropdown-exit-active {
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 900ms ease-in-out, opacity 900ms ease-in-out;
+}
+
+.gradient-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(270deg, #e0691f, #ff9671, #ffc75f, #2a4da0);
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-flow 3s ease infinite;
+}
+
+@font-face {
+  font-family: 'CustomSignature';
+  src: url('./font/Andina\ Demo.otf') format('opentype');
+  font-weight: bolder;
+  font-style: normal;
+}
+
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.font-signature {
+  font-family: 'CustomSignature';
+}

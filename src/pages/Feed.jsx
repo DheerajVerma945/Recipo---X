@@ -1,0 +1,70 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
+import Loader2 from '../components/Loader2';
+import { useSelector } from 'react-redux';
+
+const shuffleArray = (array) => {
+  const arrayCopy = [...array];
+  for (let i = arrayCopy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]];
+  }
+  return arrayCopy;
+};
+
+const Feed = () => {
+  const { categoriesandDoc, status, error } = useSelector((state) => state.config);
+  const documents = categoriesandDoc.allDocuments;
+  const shuffledDocuments = shuffleArray(documents);
+
+  return (
+    <div className="flex flex-col items-center mt-40 p-4 bg-white min-h-screen">
+      <h1 className="text-gray-800 p-3 text-center font-semibold text-xl mb-10">
+        Find Your Next Favourite Recipe Here
+      </h1>
+      {status === 'loading' && <Loader2 />}
+      {error && <p className="text-red-500">Error: {error}</p>}
+      <div className="w-full max-w-screen-lg">
+        <button
+          onClick={() => navigate(-1)}
+          className="absolute ml-0 top-10 left-2 md:ml-5 lg:ml-10 text-blue-500 hover:text-blue-700 focus:outline-none"
+          aria-label="Go back"
+        >
+          <FaArrowLeft className="inline mr-2" />
+        </button>
+        {shuffledDocuments.map((doc) => (
+          <div key={doc.$id} className="mb-4">
+            <RecipeCard doc={doc} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const RecipeCard = ({ doc }) => {
+  return (
+    <div key={doc.$id} className="bg-white shadow-lg rounded-2xl relative overflow-hidden">
+      <div className="bg-white bg-opacity-75 rounded-md p-1 m-0 mt-5 ml-5 text-blue-700 font-semibold">
+        <Link to={`/user/${String(doc.userId) || 'Anonymous'}`} className="hover:underline">
+          {doc.PostedBy || "Anonymous"}
+        </Link>
+      </div>
+      <Link to={`/meal/${doc.$id}`} className="block" 
+      onClick={()=>window.scrollTo({ top: 0 })}>
+        <div className="p-4 flex flex-col items-center">
+          <div className="text-xl font-bold mb-2">{doc['Recipe-Name']}</div>
+          <img
+            src={doc['Image']}
+            alt={doc['Recipe-Name']}
+            className="h-64 w-64 object-cover mb-2"
+          />
+        </div>
+        <p className='ml-5 mb-5 text-gray-700 font-semibold text-lg '>Likes:{doc.Likes}</p>
+      </Link>
+    </div>
+  );
+};
+
+export default Feed;

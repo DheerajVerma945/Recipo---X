@@ -1,0 +1,46 @@
+@keyframes scale {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.loader {
+  position: relative;
+  width: 300px; 
+  height: 300px;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: #8a3333;
+  animation: scale 1.3s infinite ease-in-out;
+}
+
+.level1 {
+  width: 200px; 
+  height: 200px; 
+  animation-delay: 0s;
+}
+
+.level2 {
+  width: 180px;
+  height: 180px; 
+  animation-delay: 0.2s;
+}
+
+.level3 {
+  width: 160px; 
+  height: 160px;
+  animation-delay: 0.4s; 
+}
+

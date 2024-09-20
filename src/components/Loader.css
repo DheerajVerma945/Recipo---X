@@ -1,0 +1,64 @@
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100vw;
+  height: 20vh;
+}
+
+.animated-shape {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(90deg, #6c1417, #ff8c00, #ffdd00);
+  background-size: 200% 300%;
+  border-radius: 50%;
+  position: absolute;
+  animation: morph 5s infinite ease-in-out, rotate 5s linear infinite, gradient 3s ease infinite;
+}
+
+@keyframes morph {
+  0% {
+    border-radius: 50%;
+    transform: scale(1);
+  }
+
+  33% {
+    border-radius: 0%;
+    transform: scale(1.3);
+  }
+
+  66% {
+    border-radius: 10%;
+    transform: scale(0.8);
+  }
+
+  100% {
+    border-radius: 50%;
+    transform: scale(1);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
+}
