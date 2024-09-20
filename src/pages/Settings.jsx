@@ -50,10 +50,18 @@ function Settings() {
     const changePassword = async (e) => {
         e.preventDefault();
         setLoading(true);
+        if (pass.length < 8) {
+            setError("A password should be at least 12 characters long, include a combination of uppercase and lowercase letters, numbers, and symbols")
+            setLoading(false);
+            return;
+        }
+        
         try {
             const response = await updatePassword(pass, oldPass);
-            setSuccessMsg('Password updated successfully');
-            setError('');
+            if (response.success) {
+                setSuccessMsg('Password updated successfully');
+                setError('');
+            }
         } catch (error) {
             setError('Error updating password. Please ensure the old password is correct.');
         } finally {

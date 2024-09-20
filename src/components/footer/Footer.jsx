@@ -38,17 +38,17 @@ function Footer() {
             <h2 className="text-xl hidden md:block lg:block font-semibold mb-2">Socials</h2>
             <div className="flex space-x-4 justify-center md:justify-start">
               <a
-                href="https://github.com/DheerajVerma945"
+                href="https://github.com/DheerajVerma945/Recipo---X"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-gray-300 transition-colors"
-                aria-label="Facebook"
+                aria-label="Github repo"
               >
                 <FaGithub className='text-4xl m-2 md:text-2xl lg:text-2xl' />
               </a>
 
               <a
-                href="https://www.linkedin.com/vermadheeraj945"
+                href="https://www.linkedin.com/company/recipox/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-gray-300 transition-colors"
@@ -57,7 +57,7 @@ function Footer() {
                 <FaLinkedinIn className='text-4xl m-2 md:text-2xl lg:text-2xl' />
               </a>
               <a
-                href="https://www.instagram.com/vermadheeraj_945/"
+                href="https://www.instagram.com/recipox/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-gray-300 transition-colors"

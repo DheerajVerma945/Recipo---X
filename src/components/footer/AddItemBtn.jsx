@@ -17,6 +17,7 @@ function AddItemBtn() {
             setShowMessage(true);
 
         } else {
+            window.scrollTo({ top: 0 });
             navigate('/post');
         }
         setLoading(false);
@@ -45,6 +46,7 @@ function AddItemBtn() {
                             className=" bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 focus:outline-none"
                             onClick={() => {
                                 setShowMessage(false);
+                                window.scrollTo({ top: 0 });
                                 navigate('/login');
                             }}
                         >
