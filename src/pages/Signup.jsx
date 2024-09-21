@@ -27,7 +27,7 @@ const SignupPage = () => {
     }
     try {
       const result = await dispatch(signupThunk({ email, password, name })).unwrap();
-      if(result.message === "A user with the same id, email, or phone already exists in this project."){
+      if (result.message === "A user with the same id, email, or phone already exists in this project.") {
         setVerificationMessage("A user with the same id, email, or phone already exists in this project.");
         return;
       }
@@ -105,7 +105,9 @@ const SignupPage = () => {
           </div>
           {verificationMessage && (
             <div className="text-red-600 text-center text-sm">
-              {verificationMessage}
+              {verificationMessage.includes(':')
+                ? verificationMessage.split(':').slice(-1)[0].trim()
+                : verificationMessage}
             </div>
           )}
           <button
