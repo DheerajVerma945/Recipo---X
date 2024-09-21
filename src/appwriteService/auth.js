@@ -52,15 +52,15 @@ export const login = async (email, password) => {
             await account.deleteSession(session.$id);
             return {id:userData.$id,error:"Please verify your email to log in."};
         }
-        return { session };
+        return {session};
     } catch (error) {
         throw new Error(error.message || 'Login failed.');
     }
 };
 
-export const verify = async (id, otp) => {
+export const verify = async(id,otp)=>{
     try {
-        await account.createSession(id, otp);
+    await account.createSession(id,otp);
     } catch (error) {
         throw error;
     }

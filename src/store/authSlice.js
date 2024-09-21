@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { signup, login, checkSession } from '../appwriteService/auth';
+import { signup, checkSession } from '../appwriteService/auth';
 
 const initialState = {
     status: 'idle',
@@ -16,14 +16,6 @@ export const signupThunk = createAsyncThunk('auth/signup', async ({ email, passw
     }
 });
 
-export const loginThunk = createAsyncThunk('auth/login', async ({ email, password }, { rejectWithValue }) => {
-    try {
-        const { session } = await login(email, password);
-        return { session };
-    } catch (error) {
-        return rejectWithValue(error.message || 'Login failed.');
-    }
-});
 
 export const checkSessionThunk = createAsyncThunk('auth/checkSession', async (_, { rejectWithValue }) => {
     try {
@@ -37,11 +29,7 @@ export const checkSessionThunk = createAsyncThunk('auth/checkSession', async (_,
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {
-        clearError(state) {
-            state.error = null;
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(signupThunk.pending, (state) => {
@@ -57,21 +45,6 @@ const authSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.payload || action.error.message;
             })
-
-            .addCase(loginThunk.pending, (state) => {
-                state.status = 'loading';
-                state.error = null;
-            })
-            .addCase(loginThunk.fulfilled, (state, action) => {
-                state.status = 'succeeded';
-                state.session = action.payload.session;
-                state.error = null;
-            })
-            .addCase(loginThunk.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.payload || action.error.message;
-            })
-
             .addCase(checkSessionThunk.pending, (state) => {
                 state.status = 'loading';
                 state.error = null;
