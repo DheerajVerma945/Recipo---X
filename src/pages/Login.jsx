@@ -22,7 +22,7 @@ const LoginPage = () => {
 
         try {
             if(password.length < 8){
-                setError("Password must be greater than 8 digits");
+                setError("A password should be at least 8 characters long, include a combination of uppercase and lowercase letters, numbers, and symbols");
                 setLoading(false);
                 return;
             }

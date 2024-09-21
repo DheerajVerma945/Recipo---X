@@ -53,7 +53,7 @@ function Settings() {
         e.preventDefault();
         setLoading(true);
         if (pass.length < 8) {
-            setError("A password should be at least 12 characters long, include a combination of uppercase and lowercase letters, numbers, and symbols")
+            setError("A password should be at least 8 characters long, include a combination of uppercase and lowercase letters, numbers, and symbols")
             setLoading(false);
             return;
         }
