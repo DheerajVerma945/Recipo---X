@@ -6,6 +6,7 @@ function Logo() {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/");
+    window.scrollTo({top:0});
   }
   return (
     <div className="flex flex-row justify-center items-center ml-5 m-3">

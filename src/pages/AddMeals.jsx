@@ -4,6 +4,7 @@ import { user } from '../appwriteService/auth';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Loader2 from '../components/Loader2';
+import { useSelector } from 'react-redux';
 
 const AddMeals = () => {
     const navigate = useNavigate();
@@ -66,6 +67,9 @@ const AddMeals = () => {
             await addPost(userId, id);
             setDocumentId(id);
             setSuccess('Meal added successfully!');
+            setInterval(() => {
+                setSuccess(null)
+            }, 5000);
             setMealName('');
             setRecipe('');
             setIngredients('');
@@ -82,14 +86,14 @@ const AddMeals = () => {
     };
 
     return (
-        <div className="relative max-w-2xl pt-40 mx-auto bg-white shadow-md rounded-lg p-8">
+        <div className="relative max-w-2xl  mx-auto my-40 bg-gray-100 shadow-md rounded-lg p-8">
             {loading && <Loader2 />}
             <button
                 onClick={() => navigate(-1)}
-                className="mb-4   mr-5 ml-0 md:ml-5 lg:ml-10 text-gray-100 overflow-hidden hover:text-blue-700 focus:outline-none rounded-full bg-blue-500"
+                className="absolute  text-gray-100 rounded-full bg-blue-500"
                 aria-label="Go back"
             >
-                <FaArrowLeft className="inline m-2  " />
+                <FaArrowLeft className="inline m-2" />
             </button>
             <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Add New Meal</h1>
 
@@ -104,7 +108,7 @@ const AddMeals = () => {
                                 {documentId && (
                                     <button
                                         onClick={() => navigate(`/meal/${documentId}`)}
-                                        className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg"
                                     >
                                         View Your Post
                                     </button>
@@ -155,18 +159,18 @@ const AddMeals = () => {
                     <input
                         type="file"
                         onChange={(e) => setImage(e.target.files[0])}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 "
                     />
                 </div>
 
                 <div>
-                    <label className="block text-gray-700 text-sm font-bold mb-2">Area *</label>
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Country *</label>
                     <input
                         type="text"
                         value={area}
                         onChange={(e) => setArea(e.target.value)}
                         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Enter area"
+                        placeholder="Enter country"
                         required
                     />
                 </div>

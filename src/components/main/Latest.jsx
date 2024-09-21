@@ -17,7 +17,6 @@ function Latest() {
           setLatestMealsData(response);
         }
       } catch (error) {
-        console.error('Failed to fetch latest meals:', error);
         setError('Failed to load meals.');
       } finally {
         setLoading(false);
@@ -93,7 +92,7 @@ function Latest() {
           <div className="flex items-center justify-center">
             <Link
               to="/feed"
-              className="flex items-center justify-center text-white bg-blue-500 hover:bg-blue-700 p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out"
+              className="flex items-center justify-center text-white bg-blue-500 hover:bg-blue-700 p-3 mr-3  rounded-full shadow-lg transition-all duration-300 ease-in-out"
               style={{ width: '60px', height: '60px' }}
             >
               <FaArrowRight className="text-xl" />

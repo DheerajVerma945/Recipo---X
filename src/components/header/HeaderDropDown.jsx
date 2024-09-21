@@ -102,7 +102,7 @@ function HeaderDropDown() {
       >
         <button
           onClick={toggleDropdown}
-          className="absolute top-4 right-4 text-white hover:font-bold"
+          className="absolute top-6 right-4 text-white "
         >
           <FaTimes className="h-6 w-6" />
         </button>
@@ -179,8 +179,8 @@ function HeaderDropDown() {
           )}
         </div>
 
-        <div className="mt-32 text-center text-white text-sm sm:text-lg lg:text-xl font-signature flex justify-center">
-          <p className="gradient-text whitespace-nowrap overflow-hidden text-4xl font-extrabold  signature">
+        <div className="mt-32 text-center text-white text-sm sm:text-lg lg:text-xl  flex justify-center">
+          <p className="gradient-text whitespace-nowrap  text-4xl  signature">
             Recipo X
           </p>
         </div>

@@ -29,14 +29,6 @@
   -webkit-text-fill-color: transparent;
   animation: gradient-flow 3s ease infinite;
 }
-
-@font-face {
-  font-family: 'CustomSignature';
-  src: url('./font/Andina\ Demo.otf') format('opentype');
-  font-weight: bolder;
-  font-style: normal;
-}
-
 @keyframes gradient-flow {
   0% {
     background-position: 0% 50%;

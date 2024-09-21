@@ -31,7 +31,6 @@ function SearchBar() {
                 setCache(prevCache => ({ ...prevCache, [query]: meals }));
                 setData(meals);
             } catch (error) {
-                console.log("Error fetching meal suggestions:", error);
                 setData([]);
             }
         } else {
@@ -90,7 +89,7 @@ function SearchBar() {
 
             {typed.length > 0 && data.length > 0 && (
                 <div className="flex flex-col items-center justify-center">
-                    <ul className='absolute top-full  mt-2 border border-gray-600 rounded-md w-60 md:w-80 lg:w-96 bg-white shadow-lg z-10 max-h-60 overflow-y-auto'>
+                    <ul className='absolute top-full  mt-2 border border-gray-600 rounded-md w-60 md:w-80 lg:w-96 bg-white shadow-lg z-10 max-h-60 overflow-y-auto scrollbar-hidden'>
                         {data.map((item) => (
                             <li
                                 key={item.$id}

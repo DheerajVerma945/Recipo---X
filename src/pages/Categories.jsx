@@ -37,14 +37,14 @@ const Category = React.memo(() => {
 
   if (status === 'loading') {
     return <>
-      <div className="pt-40 m-10 overflow-x-auto pb-4">
+      <div className="pt-40 m-10 overflow-x-auto scrollbar-hidden pb-4">
         <div className="flex items-center justify-start flex-nowrap gap-5 md:gap-8 lg:gap-12 w-full px-4 py-2 ">
           {memoizedCategories.map((category) => (
             <button
               key={category}
               onClick={() => handleCategoryChange(category)}
               className={`p-2 px-4 text-sm md:text-base lg:text-lg font-semibold rounded-full transition-colors ease-in-out duration-300 whitespace-nowrap 
-                ${category === selectedCategory ? 'bg-gray-900 text-white' : 'bg-gray-700 text-white hover:bg-gray-800 hover:text-gray-200'}`}
+                ${category === selectedCategory ? 'bg-gray-900 text-white' : 'bg-gray-700 text-white hover:bg-gray-800 hover:text-gray-200 '}`}
             >
               {category}
             </button>
@@ -55,7 +55,7 @@ const Category = React.memo(() => {
         {[...Array(4)].map((_, index) => (
           <div
             key={index}
-            className="w-full h-52 bg-white shadow-2xl rounded-lg overflow-hidden animate-pulse"
+            className="h-52 bg-white shadow-2xl rounded-lg overflow-x-auto animate-pulse"
             style={{ marginLeft: index === 0 ? '20px' : '0' }}
           >
             <div className="h-[150px] w-full bg-gray-300"></div>
@@ -101,17 +101,17 @@ const Category = React.memo(() => {
   }
 
   return (
-    <div className="p-6 pt-32 md:pt-40 bg-gray-100 min-h-screen">
+    <div className="p-6 pt-32  md:pt-40 bg-gray-100 min-h-screen">
       <button
         onClick={() => navigate(-1)}
-        className="mb-4   mr-5 ml-0 md:ml-5 lg:ml-10 text-gray-100 overflow-hidden hover:text-blue-700 focus:outline-none rounded-full bg-blue-500"
+        className="mb-4   mr-5 ml-0 md:ml-5 lg:ml-10 text-gray-100 overflow-hidden rounded-full bg-blue-500"
         aria-label="Go back"
       >
         <FaArrowLeft className="inline m-2  " />
       </button>
       <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 text-gray-900">Categories</h2>
 
-      <div className="overflow-x-auto pb-4">
+      <div className="overflow-x-auto scrollbar-hidden pb-4">
         <div className="flex items-center justify-start flex-nowrap gap-5 md:gap-8 lg:gap-12 px-4 py-2 w-full ">
           {memoizedCategories.map((category) => (
             <button

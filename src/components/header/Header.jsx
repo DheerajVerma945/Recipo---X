@@ -39,7 +39,7 @@ function Header() {
   };
 
   return (
-    <div className='fixed top-0 left-0 w-full z-40 bg-[#8a3333]'>
+    <div className='fixed top-0 left-0 right-0  w-full z-40 bg-[#8a3333]'>
       <div className='flex flex-row items-center gap-10 text-white px-4'>
         <Logo />
         <div className='flex flex-row w-full items-center justify-end gap-3 md:gap-4 lg:gap-5 relative'>
@@ -47,7 +47,7 @@ function Header() {
             onClick={handlefavouritesClick}
             className="m-2"
           >
-            <FaHeart color='pink' className='text-lg md:text-xl lg:text-2xl' />
+            <FaHeart color='white' className='text-lg md:text-xl lg:text-2xl' />
           </button>
           <button
             className="m-2"
@@ -59,8 +59,8 @@ function Header() {
         </div>
       </div>
       {showAlert && (
-        <div className="fixed  left-0 right-0 bg-gray-800 text-white text-center py-2 z-100">
-          <p className="inline">You need to log in to access this page.</p>
+        <div className="fixed  left-0 right-0 bg-gray-800 text-white text-center py-2 z-10">
+          <p>You need to log in to access this page.</p>
           <button
             className="absolute top-2 right-4 text-white"
             onClick={handleCloseAlert}

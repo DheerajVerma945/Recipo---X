@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import Loader2 from '../components/Loader2';
@@ -19,20 +19,21 @@ const Feed = () => {
   const shuffledDocuments = shuffleArray(documents);
 
   return (
-    <div className="flex flex-col items-center mt-40 p-4 bg-white min-h-screen">
-      <h1 className="text-gray-800 p-3 text-center font-semibold text-xl mb-10">
+    <div className="flex relative  flex-col items-center mt-40 p-4 bg-white min-h-screen">
+      <button
+        onClick={() => navigate(-1)}
+        className=" absolute left-5 top-0  text-gray-100 overflow-hidden rounded-full bg-blue-500"
+        aria-label="Go back"
+      >
+        <FaArrowLeft className="inline m-2  " />
+      </button>
+      <h1 className="text-gray-800 mt-8 p-3 text-center font-bold text-2xl mb-10">
         Find Your Next Favourite Recipe Here
       </h1>
       {status === 'loading' && <Loader2 />}
       {error && <p className="text-red-500">Error: {error}</p>}
-      <div className="w-full max-w-screen-lg">
-        <button
-          onClick={() => navigate(-1)}
-          className="absolute ml-0 top-10 left-2 md:ml-5 lg:ml-10 text-blue-500 hover:text-blue-700 focus:outline-none"
-          aria-label="Go back"
-        >
-          <FaArrowLeft className="inline mr-2" />
-        </button>
+      <div className="w-full  max-w-screen-lg">
+
         {shuffledDocuments.map((doc) => (
           <div key={doc.$id} className="mb-4">
             <RecipeCard doc={doc} />
@@ -44,15 +45,18 @@ const Feed = () => {
 };
 
 const RecipeCard = ({ doc }) => {
+  const { session } = useSelector((state) => state.auth);
+  const userId = session?.userId;
   return (
     <div key={doc.$id} className="bg-white shadow-lg rounded-2xl relative overflow-hidden">
       <div className="bg-white bg-opacity-75 rounded-md p-1 m-0 mt-5 ml-5 text-blue-700 font-semibold">
-        <Link to={`/user/${String(doc.userId) || 'Anonymous'}`} className="hover:underline">
-          {doc.PostedBy || "Anonymous"}
+        <Link to={userId ? `/user/${postedId}` : '#'} className="hover:underline text-blue-700 font-semibold"
+          onClick={window.scrollTo({ top: 0 })}>
+          {userId ? (postedBy || "Anonymous") : 'Anonymous'}
         </Link>
       </div>
-      <Link to={`/meal/${doc.$id}`} className="block" 
-      onClick={()=>window.scrollTo({ top: 0 })}>
+      <Link to={`/meal/${doc.$id}`} className="block"
+        onClick={() => window.scrollTo({ top: 0 })}>
         <div className="p-4 flex flex-col items-center">
           <div className="text-xl font-bold mb-2">{doc['Recipe-Name']}</div>
           <img

@@ -33,7 +33,7 @@ export const uploadFileAndGetUrl = async (file) => {
 
         const fileId = uploadResponse.$id;
 
-        const fileUrl = `https://cloud.appwrite.io/v1/storage/buckets/${postBucketId}/files/${fileId}/view?project=66e0247700088525a3cf`;
+        const fileUrl = `https://cloud.appwrite.io/v1/storage/buckets/${postBucketId}/files/${fileId}/view?project=${appWriteProjectId}`;
 
         return fileUrl;
     } catch (error) {
@@ -294,7 +294,7 @@ export const updatePost = async (docId, updatedDoc) => {
 
 export const deletePost = async (docId, userId) => {
     try {
-        const response = await databases.deleteDocument(databaseId, MealcollectionId, docId);
+        await databases.deleteDocument(databaseId, MealcollectionId, docId);
         const userDocs = await databases.listDocuments(databaseId, userCollectionId, [Query.equal('userId', userId)]);
         const userDoc = userDocs.documents[0];
         const posted = userDoc.Posted;

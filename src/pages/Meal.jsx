@@ -58,6 +58,9 @@ function Meal() {
   const handleLikeClick = async () => {
     if (!userId) {
       setShowLoginMessage(true);
+      setInterval(() => {
+        setShowLoginMessage(false);
+      }, 3000);
       return;
     }
     liked ? setLiked(false) : setLiked(true);
@@ -157,13 +160,13 @@ function Meal() {
       <h1 className="text-2xl font-bold mb-2 text-center">{recipeName}</h1>
       <div className="mt-4 ml-4">
         <h2 className="text-xl font-semibold mb-2">Ingredients</h2>
-        <ul className="list-disc ml-6 space-y-2 max-h-80 overflow-y-auto">
+        <ul className="list-disc ml-6 space-y-2 max-h-80 overflow-y-auto ">
           {ingredientList}
         </ul>
       </div>
       <div className="mt-4 ml-4">
         <h2 className="text-xl font-semibold mb-2">Recipe</h2>
-        <ul className="list-disc ml-6 space-y-2 max-h-80 overflow-y-auto">
+        <ul className="list-disc ml-6 space-y-2 max-h-80 overflow-y-auto ">
           {recipeSteps.map((step, index) => (
             <li key={index} className="text-gray-700">
               {step.trim()}
@@ -183,7 +186,7 @@ function Meal() {
 
         <button
           onClick={handleAddClick}
-          className={`flex items-center justify-center space-x-2 ${added ? 'text-pink-700' : 'text-pink-400'
+          className={`flex items-center justify-center space-x-2 ${added ? 'text-pink-800' : 'text-pink-400'
             }`}
         >
           <FaHeart className="text-lg" />
