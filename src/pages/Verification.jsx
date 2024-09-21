@@ -15,7 +15,6 @@ const VerifyPage = () => {
     e.preventDefault();
     setSuccessMessage('');
     try {
-
       await verify(userId, otp);
       setSuccessMessage('Email verified and logged in successfully! Redirecting to Home...');
       setErrorMessage('');

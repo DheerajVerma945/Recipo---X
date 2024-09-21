@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import Loader2 from '../components/Loader2';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const shuffleArray = (array) => {
@@ -14,6 +15,7 @@ const shuffleArray = (array) => {
 };
 
 const Feed = () => {
+  const navigate = useNavigate();
   const { categoriesandDoc, status, error } = useSelector((state) => state.config);
   const documents = categoriesandDoc.allDocuments;
   const shuffledDocuments = shuffleArray(documents);

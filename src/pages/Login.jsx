@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginThunk } from '../store/authSlice';
 import Loader2 from '../components/Loader2';
+import { reVerification } from '../appwriteService/auth';
 
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
+    const[userId,setUserId] = useState(null);
 
     const handleSubmit = async (event) => {
         setLoading(true);
@@ -20,7 +22,13 @@ const LoginPage = () => {
         event.preventDefault();
 
         try {
-            await dispatch(loginThunk({ email, password })).unwrap();
+            const res = await dispatch(loginThunk({ email, password })).unwrap();
+            if(res.error && res.error === "Please verify your email to log in."){
+                setError("Please verify your email to log in.");
+                setUserId(res.id);
+                setLoading(false);
+                return;
+            }
             setTimeout(() => {
                 navigate('/');
             }, 1000);
@@ -82,6 +90,16 @@ const LoginPage = () => {
                     {error && (
                         <p className="text-red-500 text-center text-sm mt-2">{error}</p>
                     )}
+                    {error === "Please verify your email to log in." && 
+                    <p className='inline m-3 font-semibold text-blue-600 hover:underline cursor-pointer'
+                        onClick={()=>{
+                            reVerification(userId,email);
+                            navigate(`/verify/${userId}`);
+                        }}
+                    >
+                        Verify
+                    </p>
+                    }
                     <button
                         type="submit"
                         disabled={status === 'loading'}
