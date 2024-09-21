@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { verify } from '../appwriteService/auth';
+import Loader2 from '../components/Loader2';
 
 
 const VerifyPage = () => {
   const { userId } = useParams();
   const [otp, setOtp] = useState('');
+  const [loading,setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleVerification = async (e) => {
+    setLoading(true);
     setErrorMessage('');
     e.preventDefault();
     setSuccessMessage('');
@@ -30,10 +33,14 @@ const VerifyPage = () => {
       }
       setSuccessMessage('');
     }
+    finally{
+      setLoading(false);
+    }
   };
 
   return (
     <div className="flex flex-col  gap-20 items-center justify-center min-h-screen bg-gray-100">
+      {loading && <Loader2/>}
       <p className="text-center text-gray-700 mt-4 mb-6 text-lg font-medium">
         An email has been sent to you. Please enter the OTP below to verify your account.
       </p>
