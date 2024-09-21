@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import EditorsChoice from "../../../public/files/EditorsChoice.png"
 
 const RandomMeal = React.memo(() => {
   const [hide, setHide] = useState(false);
@@ -14,15 +15,22 @@ const RandomMeal = React.memo(() => {
 
   return (
     <div className="flex items-center justify-center pt-10 px-4 lg:px-8 mb-5">
+      
       <div className={` text-white p-3 transition-opacity duration-1000 rounded-lg max-w-4xl ${hide ? 'hidden opacity-0' : 'opacity-100'} ${randomMeal ? "bg-gray-500 shadow-lg " : ""}`}>
-        <h2 className='m-3 pb-2 text-center text-xl lg:text-2xl font-bold'>Pick of the moment </h2>
-        <div className='flex flex-col md:flex-col lg:flex-col items-center gap-4'>
+
+        <div className='flex relative flex-col md:flex-col lg:flex-col items-center gap-4'>
+        <img
+        style={{ transform: 'rotate(-25deg)' }}
+        src={EditorsChoice}
+        alt="Editor's Choice"
+        className="h-20 md:h-24 lg:h-24 absolute  -top-8 -left-8 z-20"
+      />
           {randomMeal && (
             <>
               <img
                 src={randomMeal.Image}
                 alt={randomMeal['Recipe-Name']}
-                className='h-28 rounded-lg shadow-2xl'
+                className='h-36 w-36 mt-5 rounded-lg shadow-2xl'
               />
               <div>
                 <h3 className="text-lg md:text-xl text-center font-semibold mb-3">
