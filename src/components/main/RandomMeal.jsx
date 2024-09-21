@@ -30,7 +30,7 @@ const RandomMeal = React.memo(() => {
               <img
                 src={randomMeal.Image}
                 alt={randomMeal['Recipe-Name']}
-                className='h-36 w-36 mt-5 ml-10 mr-10 rounded-lg shadow-2xl'
+                className='h-36 w-36 mt-5 rounded-lg shadow-2xl'
               />
               <div>
                 <h3 className="text-lg md:text-xl text-center font-semibold mb-3">
