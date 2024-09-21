@@ -50,9 +50,9 @@ const RecipeCard = ({ doc }) => {
   return (
     <div key={doc.$id} className="bg-white shadow-lg rounded-2xl relative overflow-hidden">
       <div className="bg-white bg-opacity-75 rounded-md p-1 m-0 mt-5 ml-5 text-blue-700 font-semibold">
-        <Link to={userId ? `/user/${doc['postedId']}` : '#'} className="hover:underline text-blue-700 font-semibold"
+        <Link to={userId ? `/user/${doc['userId']}` : '#'} className="hover:underline text-blue-700 font-semibold"
           onClick={window.scrollTo({ top: 0 })}>
-          {userId ? (doc['postedBy'] || "Anonymous") : 'Anonymous'}
+          {userId ? (doc['PostedBy'] || "Anonymous") : 'Anonymous'}
         </Link>
       </div>
       <Link to={`/meal/${doc.$id}`} className="block"
