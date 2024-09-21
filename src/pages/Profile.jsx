@@ -3,11 +3,13 @@ import { logout, updateName, user } from '../appwriteService/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { getUserDoc, uploadDpAndGetUrl, updateDp, updateBio } from '../appwriteService/user';
 import { FaCamera, FaChevronRight } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Loader2 from '../components/Loader2';
 import { FaCheck } from 'react-icons/fa6';
+import { checkSessionThunk } from '../store/authSlice';
 
 function Profile() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { session } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
@@ -92,7 +94,7 @@ function Profile() {
     try {
       await logout();
       navigate("/");
-      window.location.reload();
+      dispatch(checkSessionThunk());
 
     } catch (error) {
       console.log('Error in logout:', error);

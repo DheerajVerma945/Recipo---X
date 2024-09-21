@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { verify } from '../appwriteService/auth';
 import Loader2 from '../components/Loader2';
+import { checkSessionThunk } from '../store/authSlice';
+import { useDispatch } from 'react-redux';
 
 
 const VerifyPage = () => {
+  const dispatch = useDispatch();
   const { userId } = useParams();
   const [otp, setOtp] = useState('');
   const [loading,setLoading] = useState(false);
@@ -22,8 +25,8 @@ const VerifyPage = () => {
       setSuccessMessage('Email verified and logged in successfully! Redirecting to Home...');
       setErrorMessage('');
       setTimeout(() => {
+        dispatch(checkSessionThunk());
         navigate('/');
-        window.location.reload();
       }, 2000);
     } catch (error) {
       if (error.message.includes("Creation of a session is prohibited when a session is active")) {

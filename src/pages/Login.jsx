@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader2 from '../components/Loader2';
 import { login, reVerification } from '../appwriteService/auth';
+import { checkSessionThunk } from '../store/authSlice';
 
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -21,13 +22,12 @@ const LoginPage = () => {
         event.preventDefault();
 
         try {
-            if(password.length < 8){
+            if (password.length < 8) {
                 setError("A password should be at least 8 characters long, include a combination of uppercase and lowercase letters, numbers, and symbols");
                 setLoading(false);
                 return;
             }
-            const res = await login(email,password);
-            console.log(res);
+            const res = await login(email, password);
             if (res.error && res.error === "Please verify your email to log in.") {
                 setError("Please verify your email to log in.");
                 setUserId(res.id);
@@ -36,6 +36,7 @@ const LoginPage = () => {
             }
             else {
                 setTimeout(() => {
+                    dispatch(checkSessionThunk());
                     navigate('/');
                 }, 1000);
             }
@@ -99,7 +100,7 @@ const LoginPage = () => {
                     )}
                     {error === "Please verify your email to log in." &&
                         <p className='inline ml-2 font-semibold text-blue-600 hover:underline cursor-pointer'
-                            onClick={async() => {
+                            onClick={async () => {
                                 await reVerification(userId, email);
                                 navigate(`/verify/${userId}`);
                             }}

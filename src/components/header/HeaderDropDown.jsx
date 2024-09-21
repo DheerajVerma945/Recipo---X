@@ -20,9 +20,8 @@ function HeaderDropDown() {
     setIsLoading(true);
     try {
       await logout();
+      dispatch(checkSessionThunk());
       navigate("/");
-      window.location.reload();
-
     } catch (error) {
       throw new Error(error);
     } finally {

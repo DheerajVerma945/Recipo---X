@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { FaCalendar, FaHistory, FaKey, FaSignOutAlt, FaUserTimes } from 'react-icons/fa';
 import { logoutAll, getAllSessions, updatePassword, user } from '../appwriteService/auth';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Loader2 from '../components/Loader2';
+import { checkSessionThunk } from '../store/authSlice';
 
 function Settings() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const [activeTab, setActiveTab] = useState('password');
     const [oldPass, setOldPass] = useState('');
@@ -78,8 +80,8 @@ function Settings() {
             await logoutAll();
             setSuccessMsg('Logged out from all devices successfully.');
             setTimeout(() => {
+                dispatch(checkSessionThunk());
                 navigate('/');
-                window.location.reload();
             }, 2000);
         } catch (error) {
             setError('Error logging out from all devices.');
