@@ -25,6 +25,14 @@ export const signup = async (email, password, name) => {
     }
 };
 
+export const reVerification = async (userId, email) => {
+    try {
+        await account.createEmailToken(userId, email);
+    } catch (error) {
+        throw new Error(error.message || "Please try again later ");
+    }
+}
+
 export const getUserById = async (userId) => {
     try {
         const response = await account.get(String(userId));
@@ -42,7 +50,7 @@ export const login = async (email, password) => {
 
         if (!userData.emailVerification) {
             await account.deleteSession(session.$id);
-            throw new Error('Please verify your email to log in.');
+            return {id:userData.$id,error:"Please verify your email to log in."};
         }
         return { session };
     } catch (error) {
@@ -50,9 +58,9 @@ export const login = async (email, password) => {
     }
 };
 
-export const verify = async(id,otp)=>{
+export const verify = async (id, otp) => {
     try {
-    await account.createSession(id,otp);
+        await account.createSession(id, otp);
     } catch (error) {
         throw error;
     }
