@@ -16,6 +16,7 @@ const SignupPage = () => {
   const [verificationMessage, setVerificationMessage] = useState('');
 
   const handleSubmit = async (event) => {
+    setVerificationMessage('');
     setLoading(true);
     event.preventDefault();
 
