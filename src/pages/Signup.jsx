@@ -34,7 +34,7 @@ const SignupPage = () => {
       }
     } catch (err) {
       console.error('Signup failed:', err);
-      setVerificationMessage(error.message || 'Signup failed. Please try again.');
+      setVerificationMessage(result.message || error.message || 'Signup failed. Please try again.');
     }
     finally {
       setLoading(false);
