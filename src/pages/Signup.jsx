@@ -25,9 +25,9 @@ const SignupPage = () => {
       setLoading(false);
       return;
     }
-
+    let result ;
     try {
-      const result = await dispatch(signupThunk({ email, password, name })).unwrap();
+      result = await dispatch(signupThunk({ email, password, name })).unwrap();
       await createUserDoc(result.userId, name);
       if (!result.verified) {
         navigate(`/verify/${result.userId}`);
