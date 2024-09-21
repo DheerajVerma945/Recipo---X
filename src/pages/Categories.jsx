@@ -55,7 +55,7 @@ const Category = React.memo(() => {
         {[...Array(4)].map((_, index) => (
           <div
             key={index}
-            className="h-52 bg-white shadow-2xl rounded-lg overflow-x-auto animate-pulse"
+            className="h-52 bg-white shadow-2xl w-full rounded-lg overflow-hidden animate-pulse"
             style={{ marginLeft: index === 0 ? '20px' : '0' }}
           >
             <div className="h-[150px] w-full bg-gray-300"></div>
