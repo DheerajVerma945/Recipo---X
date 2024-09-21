@@ -9,7 +9,7 @@ import { AddMeals, Category, Favourites, Feed, Home, LikedPosts, LoginPage, Meal
 
 
 const Loader = () => (
-    <div className="w-screen h-screen bg-white flex items-center justify-center z-50 fixed">
+    <div className="w-screen h-screen bg-white flex items-center justify-center fixed" style={{zIndex:100}}>
         <div className="loader relative flex items-center justify-center">
             <div className="circle level1"></div>
             <div className="circle level2"></div>

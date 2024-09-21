@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { logout, updateName, user } from '../appwriteService/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useResolvedPath } from 'react-router-dom';
 import { getUserDoc, uploadDpAndGetUrl, updateDp, updateBio } from '../appwriteService/user';
 import { FaCamera, FaChevronRight } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader2 from '../components/Loader2';
 import { FaCheck } from 'react-icons/fa6';
 import { checkSessionThunk } from '../store/authSlice';
+import userSlice from '../store/userSlice';
 
 function Profile() {
   const dispatch = useDispatch();
@@ -24,6 +25,8 @@ function Profile() {
   const [error, setError] = useState(null);
   const [uploadImage, setUploadImage] = useState(false);
   const userId = session?.userId;
+  const {userDoc} = useSelector( (state)=>state.auth);
+  const userData = {...userDoc};
 
   useEffect(() => {
     if (!userId) {
@@ -33,9 +36,7 @@ function Profile() {
     const getData = async () => {
       setLoading(true);
       try {
-        const data = await user();
-        const userData = await getUserDoc(data.$id)
-        setName(data.name);
+        setName(userData.userName);
         setBio(userData.Bio || '');
         setDisplayedProfile(userData.Dp);
       }
