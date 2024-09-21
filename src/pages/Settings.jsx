@@ -79,6 +79,7 @@ function Settings() {
             setSuccessMsg('Logged out from all devices successfully.');
             setTimeout(() => {
                 navigate('/');
+                window.location.reload();
             }, 2000);
         } catch (error) {
             setError('Error logging out from all devices.');
