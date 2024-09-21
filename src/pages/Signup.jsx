@@ -21,6 +21,7 @@ const SignupPage = () => {
 
     if (password !== confirmPassword) {
       setVerificationMessage('Passwords do not match.');
+      setLoading(false);
       return;
     }
 
