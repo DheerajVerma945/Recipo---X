@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { logout, updateName, user } from '../appwriteService/auth';
-import { Link, useNavigate, useResolvedPath } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getUserDoc, uploadDpAndGetUrl, updateDp, updateBio } from '../appwriteService/user';
 import { FaCamera, FaChevronRight } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader2 from '../components/Loader2';
 import { FaCheck } from 'react-icons/fa6';
 import { checkSessionThunk } from '../store/authSlice';
-import userSlice from '../store/userSlice';
 
 function Profile() {
   const dispatch = useDispatch();
@@ -25,36 +24,29 @@ function Profile() {
   const [error, setError] = useState(null);
   const [uploadImage, setUploadImage] = useState(false);
   const userId = session?.userId;
-  const { userDoc } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (!userId) {
-      setError("User must be logged in");
+      setError("User must be logged in ");
       return;
     }
-
-    if (userDoc) {
+    const getData = async () => {
       setLoading(true);
-      setName(userDoc.userName);
-      setBio(userDoc.Bio || '');
-      setDisplayedProfile(userDoc.Dp);
-      setLoading(false);
-    } else {
-      setLoading(true);
-      const getData = async () => {
-        try {
-          // Wait for the userDoc to be fetched
-          await dispatch(userDocThunk({ id: userId })).unwrap();
-        } catch (error) {
-          setError('Failed to load user data.');
-        } finally {
-          setLoading(false);
-        }
-      };
-      getData();
-    }
-  }, [userId, userDoc, dispatch]);
-
+      try {
+        const userData = await getUserDoc(userId)
+        setName(userData.userName);
+        setBio(userData.Bio || '');
+        setDisplayedProfile(userData.Dp);
+      }
+      catch (error) {
+        console.error(error);
+        setError('Failed to load user data.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    getData();
+  }, [session]);
 
   const handleFileChange = (e) => {
     if (e.target.files[0]) {

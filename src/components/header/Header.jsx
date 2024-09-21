@@ -1,22 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Logo } from "../index";
 import { FaHeart, FaUser } from 'react-icons/fa';
 import HeaderDropDown from './HeaderDropDown';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { userDocThunk } from '../../store/userSlice';
-
+import { useSelector } from 'react-redux';
 
 function Header() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { session } = useSelector((state) => state.auth);
   const [showAlert, setShowAlert] = useState(false);
-  const userId = session?.userId;
-
-  useEffect( ()=>{
-    dispatch(userDocThunk({ id: userId }));
-  })
 
   const handleProfileClick = (e) => {
     e.preventDefault();
