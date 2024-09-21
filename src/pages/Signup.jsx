@@ -25,16 +25,15 @@ const SignupPage = () => {
       setLoading(false);
       return;
     }
-    let result ;
     try {
-      result = await dispatch(signupThunk({ email, password, name })).unwrap();
+      const result = await dispatch(signupThunk({ email, password, name })).unwrap();
       await createUserDoc(result.userId, name);
       if (!result.verified) {
         navigate(`/verify/${result.userId}`);
       }
     } catch (err) {
       console.error('Signup failed:', err);
-      setVerificationMessage(result.message || error.message || 'Signup failed. Please try again.');
+      setVerificationMessage(error.message || 'Invalid `password`: Password must be between 8 and 265 characters long, and should not be one of the commonly used password.');
     }
     finally {
       setLoading(false);
