@@ -21,7 +21,7 @@ export const signup = async (email, password, name) => {
             return { response, verified: false, error: 'Failed to send verification email. Please check your email configuration.' };
         }
     } catch (error) {
-        throw new Error('Signup failed. Please check the provided details and try again.');
+        throw new Error(error);
     }
 };
 

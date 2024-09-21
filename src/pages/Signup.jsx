@@ -27,6 +27,10 @@ const SignupPage = () => {
     }
     try {
       const result = await dispatch(signupThunk({ email, password, name })).unwrap();
+      if(result.message === "A user with the same id, email, or phone already exists in this project."){
+        setVerificationMessage("A user with the same id, email, or phone already exists in this project.");
+        return;
+      }
       await createUserDoc(result.userId, name);
       if (!result.verified) {
         navigate(`/verify/${result.userId}`);
