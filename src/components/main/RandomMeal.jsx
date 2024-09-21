@@ -15,16 +15,16 @@ const RandomMeal = React.memo(() => {
 
   return (
     <div className="flex items-center justify-center pt-10 px-4 lg:px-8 mb-5">
-      
-      <div className={`text-white  transition-opacity duration-1000 rounded-lg max-w-4xl ${hide ? 'hidden opacity-0' : 'opacity-100'} ${randomMeal ? "bg-gray-500 shadow-lg " : ""}`}>
 
-        <div className='flex relative flex-col md:flex-col lg:flex-col items-center gap-4'>
+      <div className={`text-white relative p-5 transition-opacity duration-1000 rounded-lg max-w-4xl ${hide ? 'hidden opacity-0' : 'opacity-100'} ${randomMeal ? "bg-gray-500 shadow-lg " : ""}`}>
         <img
-        style={{ transform: 'rotate(-25deg)' }}
-        src={EditorsChoice}
-        alt="Editor's Choice"
-        className="h-20 md:h-24 lg:h-24 absolute  -top-8 -left-8 z-20"
-      />
+          style={{ transform: 'rotate(-25deg)' }}
+          src={EditorsChoice}
+          alt="Editor's Choice"
+          className="h-20 md:h-24 lg:h-24 absolute  -top-7 -left-7 z-20"
+        />
+        <div className='flex  flex-col md:flex-col lg:flex-col items-center gap-4'>
+
           {randomMeal && (
             <>
               <img
