@@ -16,7 +16,7 @@ const RandomMeal = React.memo(() => {
   return (
     <div className="flex items-center justify-center pt-10 px-4 lg:px-8 mb-5">
       
-      <div className={` text-white p-10 transition-opacity duration-1000 rounded-lg max-w-4xl ${hide ? 'hidden opacity-0' : 'opacity-100'} ${randomMeal ? "bg-gray-500 shadow-lg " : ""}`}>
+      <div className={`text-white p-10 transition-opacity duration-1000 rounded-lg max-w-4xl ${hide ? 'hidden opacity-0' : 'opacity-100'} ${randomMeal ? "bg-gray-500 shadow-lg " : ""}`}>
 
         <div className='flex relative flex-col md:flex-col lg:flex-col items-center gap-4'>
         <img
@@ -30,7 +30,7 @@ const RandomMeal = React.memo(() => {
               <img
                 src={randomMeal.Image}
                 alt={randomMeal['Recipe-Name']}
-                className='h-36 w-36 mt-5 rounded-lg shadow-2xl'
+                className='h-36 w-36 mt-5 ml-10 mr-10 rounded-lg shadow-2xl'
               />
               <div>
                 <h3 className="text-lg md:text-xl text-center font-semibold mb-3">
