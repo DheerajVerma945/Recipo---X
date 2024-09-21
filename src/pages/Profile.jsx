@@ -25,30 +25,36 @@ function Profile() {
   const [error, setError] = useState(null);
   const [uploadImage, setUploadImage] = useState(false);
   const userId = session?.userId;
-  const {userDoc} = useSelector( (state)=>state.auth);
-  const userData = {...userDoc};
+  const { userDoc } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (!userId) {
-      setError("User must be logged in ");
+      setError("User must be logged in");
       return;
     }
-    const getData = async () => {
+
+    if (userDoc) {
       setLoading(true);
-      try {
-        setName(userData.userName);
-        setBio(userData.Bio || '');
-        setDisplayedProfile(userData.Dp);
-      }
-      catch (error) {
-        console.error(error);
-        setError('Failed to load user data.');
-      } finally {
-        setLoading(false);
-      }
-    };
-    getData();
-  }, [session]);
+      setName(userDoc.userName);
+      setBio(userDoc.Bio || '');
+      setDisplayedProfile(userDoc.Dp);
+      setLoading(false);
+    } else {
+      setLoading(true);
+      const getData = async () => {
+        try {
+          // Wait for the userDoc to be fetched
+          await dispatch(userDocThunk({ id: userId })).unwrap();
+        } catch (error) {
+          setError('Failed to load user data.');
+        } finally {
+          setLoading(false);
+        }
+      };
+      getData();
+    }
+  }, [userId, userDoc, dispatch]);
+
 
   const handleFileChange = (e) => {
     if (e.target.files[0]) {
