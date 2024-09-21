@@ -24,7 +24,7 @@ function HeaderDropDown() {
       window.location.reload();
 
     } catch (error) {
-      console.log('Error in logout:', error);
+      throw new Error(error);
     } finally {
       setIsLoading(false);
     }

@@ -19,8 +19,7 @@ export const fetchMealSuggestions = async (query) => {
     );
     return response.documents || [];
   } catch (error) {
-    console.error('Error fetching meal suggestions:', error);
-    return [];
+    throw new Error('Error fetching meal suggestions:', error);
   }
 };
 
