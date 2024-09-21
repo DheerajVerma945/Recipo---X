@@ -15,7 +15,7 @@ function Header() {
   const userId = session?.userId;
 
   useEffect( ()=>{
-    dispatchEvent(userDocThunk(userId));
+    dispatch(userDocThunk(userId));
   })
 
   const handleProfileClick = (e) => {
