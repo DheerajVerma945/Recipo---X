@@ -37,7 +37,7 @@ const SignupPage = () => {
       }
     } catch (err) {
       console.error('Signup failed:', err);
-      setVerificationMessage(error || 'Invalid `password`: Password must be between 8 and 265 characters long, and should not be one of the commonly used password.');
+      setVerificationMessage(error.message || 'Invalid `password`: Password must be between 8 and 265 characters long, and should not be one of the commonly used password.');
     }
     finally {
       setLoading(false);
