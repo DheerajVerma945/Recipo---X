@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { uploadFileAndGetUrl, createDocument, addPost } from "../appwriteService/user";
-import { checkSession, user } from '../appwriteService/auth';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Loader2 from '../components/Loader2';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { fetchCategoriesandDoc } from '../store/configSlice';
 
 const AddMeals = () => {
     const dispatch = useDispatch();
@@ -67,7 +66,7 @@ const AddMeals = () => {
 
             const userId = userData.$id;
             await addPost(userId, id);
-            dispatch(checkSession());
+            dispatch(fetchCategoriesandDoc());
             setDocumentId(id);
             setSuccess('Meal added successfully!');
             setInterval(() => {
