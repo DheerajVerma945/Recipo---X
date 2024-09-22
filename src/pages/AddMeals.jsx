@@ -4,7 +4,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Loader2 from '../components/Loader2';
 import { useDispatch } from 'react-redux';
-import user from "../appwriteService/auth"
+import {user} from "../appwriteService/auth"
 import { fetchCategoriesandDoc } from '../store/configSlice';
 
 const AddMeals = () => {
