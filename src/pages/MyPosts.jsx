@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updatePost, userPosts, deletePost } from '../appwriteService/user';
 import { Link } from 'react-router-dom';
 import { FaEllipsisV, FaEdit, FaTrash } from 'react-icons/fa';
 import Loader2 from '../components/Loader2';
 import Loader from '../components/Loader';
+import { fetchCategoriesandDoc } from '../store/configSlice';
 
 function MyPosts() {
+  const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [deleteMessage, setDeleteMessage] = useState('');
   const [updateMsg, setUpdateMsg] = useState('');
@@ -84,6 +86,7 @@ function MyPosts() {
     setLoading(true);
     try {
       await deletePost(postId, userId);
+      dispatch(fetchCategoriesandDoc());
       setDeleteMessage('Post Deleted Successfully');
       setTimeout(() => setDeleteMessage(''), 2000);
       const updatedData = data.filter((doc) => doc.$id !== postId);
@@ -127,6 +130,7 @@ function MyPosts() {
 
     <section className={`mt-40 pb-10 w-full mx-auto bg-white shadow-md rounded-lg p-4 relative ${editPost ? "h-0 overflow-hidden":""}`}>
       {loading && <Loader2 />}
+      {postLoading && <Loader2 />}
       <h1 className="text-2xl font-bold m-5">
         Your Posts{' '}
         <span className="text-xl font-semibold">({data.length})</span>
@@ -228,12 +232,12 @@ function MyPosts() {
 
 
       {updateMsg && (
-        <div className="fixed top-1/3 left-1/2 transform -translate-x-1/2 bg-green-500 text-white p-4 rounded-lg transition-opacity duration-1000 fade-out">
+        <div className="fixed top-1/3 left-1/2 transform -translate-x-1/2 bg-green-500 text-white p-4 rounded-lg transition-opacity duration-1000 z-10 fade-out">
           {updateMsg}
         </div>
       )}
       {deleteMessage && (
-        <div className="fixed top-1/3 left-1/2 transform -translate-x-1/2 bg-red-500 text-white p-4 rounded-lg transition-opacity duration-1000 fade-out">
+        <div className="fixed top-1/3 left-1/2 transform -translate-x-1/2 bg-red-500 text-white p-4 rounded-lg transition-opacity duration-1000 z-10 fade-out">
           {deleteMessage}
         </div>
       )}
