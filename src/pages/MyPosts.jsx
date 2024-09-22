@@ -14,7 +14,7 @@ function MyPosts() {
   const [loading, setLoading] = useState(false);
   const [docId, setDocId] = useState('');
   const [error, setError] = useState(null);
-  const [showOptions, setShowOptions] = useState(false);
+  const [showOptions, setShowOptions] = useState({});
   const [editPost, setEditPost] = useState(null);
   const [postLoading, setPostLoading] = useState(false);
   const { session } = useSelector((state) => state.auth);
@@ -125,7 +125,7 @@ function MyPosts() {
 
   return (
 
-    <section className="mt-40 pb-10 w-full mx-auto bg-white shadow-md rounded-lg p-4 relative">
+    <section className={`mt-40 pb-10 w-full mx-auto bg-white shadow-md rounded-lg p-4 relative ${editPost ? "h-0 overflow-hidden":""}`}>
       {loading && <Loader2 />}
       <h1 className="text-2xl font-bold m-5">
         Your Posts{' '}
@@ -133,8 +133,8 @@ function MyPosts() {
       </h1>
 
       {editPost && (
-        <div className="fixed inset-0 w-full bg-gray-800 bg-opacity-50 flex items-center justify-center z-30">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-sm">
+        <div className="fixed inset-0 mt-20 w-full bg-[#8a3333] bg-opacity-100 flex items-center justify-center z-30">
+          <div className="bg-white lg:w-4/5 w-11/12 max-h-[80vh] overflow-y-auto p-6 rounded-lg shadow-lg scrollbar-hidden">
             <h2 className="text-lg font-bold mb-4">Edit Post</h2>
 
             <label htmlFor="RecipeName">Meal Name</label>
@@ -200,6 +200,7 @@ function MyPosts() {
           </div>
         </div>
       )}
+
       {consent && (
         <div className="fixed inset-0 w-full bg-gray-800 bg-opacity-50 flex items-center flex-col justify-center z-30">
           <div className='bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-sm'>
@@ -245,17 +246,17 @@ function MyPosts() {
           >
             <div className="absolute top-4 right-4 z-20">
               <button
-                onClick={() => setShowOptions(showOptions === true ? false : true)}
+                onClick={() => setShowOptions((prev) => ({ ...prev, [doc.$id]: !prev[doc.$id] }))}
                 className="text-white text-lg"
                 aria-label="Post Options"
               >
                 <FaEllipsisV color="black" />
               </button>
-              {showOptions && (
+              {showOptions[doc.$id] && (
                 <div className="absolute top-3 right-4 bg-white rounded-md p-6 mt-2 z-30">
                   <button
                     onClick={() => {
-                      setShowOptions(false)
+                      setShowOptions((prev) => ({ ...prev, [doc.$id]: false }));
                       setEditPost(doc)
                     }}
                     className="flex items-center text-blue-600 mb-2"
@@ -264,7 +265,7 @@ function MyPosts() {
                   </button>
                   <button
                     onClick={() => {
-                      setShowOptions(false);
+                      setShowOptions((prev) => ({ ...prev, [doc.$id]: false }));;
                       setConsent(true);
                       setDocId(doc.$id);
                     }}

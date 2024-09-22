@@ -140,7 +140,7 @@ export const addFavourite = async (userId, docId) => {
         const userDocs = await databases.listDocuments(databaseId, userCollectionId, [Query.equal('userId', userId)]);
         const userDoc = userDocs.documents[0];
         const updatedFavourites = [...userDoc.Favourites, docId];
-        const response = await databases.updateDocument(databaseId, userCollectionId, userDoc.$id, {
+        await databases.updateDocument(databaseId, userCollectionId, userDoc.$id, {
             Favourites: updatedFavourites
         });
 

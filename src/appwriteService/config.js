@@ -25,7 +25,7 @@ export const fetchMealSuggestions = async (query) => {
 
 export const getRandomMeal = async () => {
   try {
-    const response = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, []);
+    const response = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, [Query.limit(100)]);
     const randomIndex = Math.floor(Math.random() * response.documents.length);
 
     if (response.documents.length === 0) {
