@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { uploadFileAndGetUrl, createDocument, addPost } from "../appwriteService/user";
-import { user } from '../appwriteService/auth';
+import { checkSession, user } from '../appwriteService/auth';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Loader2 from '../components/Loader2';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 const AddMeals = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [mealName, setMealName] = useState('');
     const [userData, setUserData] = useState(null);
@@ -65,6 +67,7 @@ const AddMeals = () => {
 
             const userId = userData.$id;
             await addPost(userId, id);
+            dispatch(checkSession());
             setDocumentId(id);
             setSuccess('Meal added successfully!');
             setInterval(() => {
