@@ -74,12 +74,12 @@ function Footer() {
           <p className="mt-2">
             Designed and developed by{' '}
             <a
-              href="https://www.linkedin.com/in"
+              href="https://www.linkedin.com/in/vermadheeraj945"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-500 hover:underline"
             >
-              Gopal & Aakash.
+             Dheeraj Verma
             </a>
           </p>
         </div>
